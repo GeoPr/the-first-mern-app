@@ -1,0 +1,15 @@
+.create {
+	min-height: 100vh;
+	padding: 100px 0px;
+	// .create__body
+	&__body {}
+	// .create__form
+	&__form {
+		display: grid;
+		grid-template: auto / 8fr 2fr;
+		column-gap: 30px;
+		button {
+			height: 100%;
+		}
+	}
+}

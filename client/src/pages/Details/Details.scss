@@ -1,0 +1,22 @@
+.details {
+	min-height: 100vh;
+	padding: 100px 0px;
+	// .details__body
+	&__body {
+		display: grid;
+		row-gap: 30px;
+	}
+	// .details__item
+	&__item {
+		display: grid;
+		row-gap: 30px;
+		p {
+			display: grid;
+			grid-template: auto / 150px 1fr;
+			a {
+				text-decoration: underline;
+				color: blue;
+			}
+		}
+	}
+}

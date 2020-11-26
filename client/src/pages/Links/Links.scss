@@ -1,0 +1,14 @@
+.links {
+  min-height: 100vh;
+  padding: 100px 0px;
+  // .links__body
+  &__body {
+    display: grid;
+    row-gap: 30px;
+  }
+}
+
+.no-links {
+  font-size: 20px;
+  text-align: center;
+}

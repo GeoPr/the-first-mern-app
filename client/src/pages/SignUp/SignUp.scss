@@ -1,0 +1,38 @@
+.auth-page {
+	min-height: 100vh;
+	// display: grid;
+	// place-content: center;
+	// grid-template: auto / minmax(500px, 1fr);
+	// row-gap: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	@media (max-width: 767.98px) {
+		padding: 100px 0px;
+	}
+	// .auth-page__form
+	&__form {
+		margin: 30px 0px 0px 0px;
+		padding: 20px;
+		border-radius: 10px;
+		display: grid;
+		row-gap: 30px;
+		width: 500px;
+		max-width: 100%;
+		background: #eee;
+		input {
+			width: 100%;
+		}
+	}
+	// .auth-page__buttons
+	&__buttons {
+		display: flex;
+		align-items: center;
+		button {
+			&:first-child {
+				margin: 0px 30px 0px 0px;
+			}
+		}
+	}
+}

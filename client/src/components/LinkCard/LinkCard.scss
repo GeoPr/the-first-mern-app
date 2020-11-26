@@ -1,0 +1,15 @@
+.details {
+  // .details__item
+  &__item {
+    display: grid;
+    row-gap: 30px;
+    p {
+      display: grid;
+      grid-template: auto / 150px 1fr;
+      a {
+        text-decoration: underline;
+        color: blue;
+      }
+    }
+  }
+}
