@@ -35,9 +35,8 @@ router.post(
       const candidate = await User.findOne({ email })
 
       if (candidate) {
-        return response.json({
+        return response.status(400).json({
           message: 'There is already user like this',
-          status: 400,
         })
       }
 
@@ -46,9 +45,8 @@ router.post(
 
       await user.save()
 
-      response.json({
+      response.status(200).json({
         message: 'User has been created',
-        status: 200,
       })
     } catch (e) {
       response.status(500).json({ message: 'Something went wrong' })
@@ -65,7 +63,6 @@ router.post(
     check('password', 'Enter password').exists(),
   ],
   async (req, res) => {
-    
     try {
       const errors = validationResult(req)
 
@@ -81,18 +78,16 @@ router.post(
       const user = await User.findOne({ email })
 
       if (!user) {
-        return res.json({
+        return res.status(400).json({
           message: 'The user is not founded',
-          status: 400,
         })
       }
 
       const isMatch = await bcrypt.compare(password, user.password)
 
       if (!isMatch) {
-        return res.json({
+        return res.status(400).json({
           message: 'The password is not correct, try again',
-          status: 400,
         })
       }
 
@@ -102,9 +97,8 @@ router.post(
 
       res.json({ token, userId: user.id, status: 200 })
     } catch (e) {
-      res.json({
+      res.status(400).json({
         message: 'Something went wrong, try again',
-        status: 400,
       })
     }
   },

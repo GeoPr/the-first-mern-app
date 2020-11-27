@@ -1,5 +1,5 @@
 import { TApp, TActions } from './../rootReducer'
-import axois from 'axios'
+import axois, { AxiosResponse } from 'axios'
 import { ThunkAction } from 'redux-thunk'
 import * as actions from './actions'
 import * as modalActions from '../modalReducer/actions'
@@ -27,16 +27,14 @@ export const signUp = (
         password,
       })
 
-      if (response.data.status === 200) {
+      if (response.status === 200) {
         dispatch(modalActions.setModalStatus(200))
         await showHideModal(dispatch, response.data.message)
         history!.push('/login')
-      } else if (response.data.status === 400) {
-        dispatch(modalActions.setModalStatus(400))
-        await showHideModal(dispatch, response.data.message)
       }
-
-    } catch (e) {}
+    } catch (e) {
+      showEror(dispatch, e.response)
+    }
 
     dispatch(loaderActions.hideLoader())
   }
@@ -52,15 +50,13 @@ export const login = (email: string, password: string): TThunk => {
         password,
       })
 
-      if (response.data.status === 200) {
+      if (response.status === 200) {
         const { token, userId } = response.data
         dispatch(actions.setUserInfo(token, userId))
-      } else if (response.data.status === 400) {
-        dispatch(modalActions.setModalStatus(400))
-        await showHideModal(dispatch, response.data.message)
       }
-
-    } catch (e) {}
+    } catch (e) {
+      showEror(dispatch, e.response)
+    }
 
     dispatch(loaderActions.hideLoader())
   }
@@ -80,4 +76,10 @@ export const logout = (): TThunk => {
 function showHideModal(dispatch: Function, text: string) {
   dispatch(modalActions.showModal(text))
   setTimeout(() => dispatch(modalActions.hideModal()), 2000)
+}
+
+function showEror(dispatch: Function, e: AxiosResponse) {
+  const { message } = e.data
+  dispatch(modalActions.setModalStatus(400))
+  showHideModal(dispatch, message)
 }
